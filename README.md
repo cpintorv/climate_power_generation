@@ -13,3 +13,10 @@ La clave primaria es la fecha. Como en el caso anterior, cada registro correspon
 webscraping_comercializa.py
 Este código genera llamadas sobre la web i-DE de Iberdrola. Hace login en la web y mantiene la sesión abierta. A continuación realiza llamadas diarias y recoge la información del consumo durante las 24 horas del día.
 La vlave primaria es la fecha. Como en los dos casos anteriores, cada registo contiene 1 día y va del 1 de enero del 2020 al 30 de septiembre del 2021.
+
+dataset_completo.csv
+Como el objetivo es no impedir el funcionamiento de i-DE, tras la implementación del código, se extrajo la información relacionada con el consumo diario hora a hora en un csv. A partir de entonces y a falta de productivizarlo se leerá el csv.
+
+main.py
+Este es el fichero principal del código. Llama a los tres códigos y los unifica en una única base de datos. Los tres datasets se unen mediante la clave primaria de fecha por lo que se genera el fichero final dataset_completo.csv que será el que se publique.
+
