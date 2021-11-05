@@ -14,9 +14,15 @@ webscraping_comercializa.py
 Este código genera llamadas sobre la web i-DE de Iberdrola. Hace login en la web y mantiene la sesión abierta. A continuación realiza llamadas diarias y recoge la información del consumo durante las 24 horas del día.
 La vlave primaria es la fecha. Como en los dos casos anteriores, cada registo contiene 1 día y va del 1 de enero del 2020 al 30 de septiembre del 2021.
 
-dataset_completo.csv
+mi_consumo.csv
 Como el objetivo es no impedir el funcionamiento de i-DE, tras la implementación del código, se extrajo la información relacionada con el consumo diario hora a hora en un csv. A partir de entonces y a falta de productivizarlo se leerá el csv.
 
 main.py
 Este es el fichero principal del código. Llama a los tres códigos y los unifica en una única base de datos. Los tres datasets se unen mediante la clave primaria de fecha por lo que se genera el fichero final dataset_completo.csv que será el que se publique.
 
+dataset_completo.csv
+Este fichero recoge la unificación de las tres bases de datos (AEMET, REE e i-DE). La clave primaria es la fecha y cada registro recoge 1 día entre el 1 de enero del 2020 y el 31 de septiembre del 2021. Es el que se subirá a Zenodo.
+
+El csv final se ha subido a la web Zenodo:
+DOI: 10.5281/zenodo.5601489
+URL: https://zenodo.org/record/5601489#.YXhDy9pByUk
