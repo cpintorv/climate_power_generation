@@ -1,8 +1,7 @@
 # Imports
-import pandas as pd
+Import pandas as pd
+Import numpy as np
 import requests
-from bs4 import BeautifulSoup
-import json
 
 
 def web_scraping_aemet(fecha_inicio, fecha_fin, api_key):
@@ -43,6 +42,8 @@ def web_scraping_aemet(fecha_inicio, fecha_fin, api_key):
 
 
     i = 0
+
+    # Itero sobre las diferentes estaciones definidas para hacer llamadas por cada una de ella
     for estacion in estaciones:
         identificador = estaciones[estacion]
         print(identificador)
@@ -59,6 +60,8 @@ def web_scraping_aemet(fecha_inicio, fecha_fin, api_key):
 
         # Lanzamos la primera llamada
         response = requests.request("GET", url, headers=headers, params=querystring)
+
+        # Analizo la vuelta de la llamada
         soup = response.text
         json_object = json.loads(soup) # Formato diccionario
         url_datos = json_object["datos"] # Seleccionamos el campo datos que nos da la nueva url
@@ -66,7 +69,11 @@ def web_scraping_aemet(fecha_inicio, fecha_fin, api_key):
         # Lanzamos la segunda llamada
         response_data = requests.request("GET", url_datos, headers=headers)
         json_datos = json.loads(response_data.text)
+
+        # Generamos en formato json la información de vuelta para analizarlo
         df_aemet = pd.json_normalize(json_datos)
+
+        # Selecciono sólo unas pocas variables ya que en función de la estación tenemos acceso a unos pocos datos
         df_seleccion = df_aemet[["fecha", "nombre", "tmed", "prec", "velmedia"]] # Seleccionamos las variables
 
         # A las variables les incorporamos el sufijo

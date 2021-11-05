@@ -1,3 +1,4 @@
+# Import libraries
 import datetime
 import json
 import pandas as pd
@@ -8,7 +9,7 @@ from dateutil.relativedelta import relativedelta
 import numpy as np
 from collections import OrderedDict
 
-
+# Function API de red electrica
 def iteracion(endpoint, start_date, end_date, sufijo):
     '''
     Función que extrae la información de la API de Red eléctrica para unas fechas en concreto
@@ -34,14 +35,16 @@ def iteracion(endpoint, start_date, end_date, sufijo):
     tipos = site_json['included']
     len_origen = len(tipos)
 
+    # Inicializo las listas
     tipo_list = []
     tipo_sub_list = []
     values = []
     dates = []
     dfs = []
+
     # En función del endpoint que se esté consultando, la estructura del JSON es diferente
     if endpoint == '/balance/balance-electrico':
-        for k in range(len_origen):
+        for k in range(len_origen): # Se itera sobre las diferentes valores
             tipo = tipos[k]['type']
             len_att = len(site_json['included'][k]['attributes']['content'])
             for n in range(len_att):
@@ -105,7 +108,7 @@ def iteracion(endpoint, start_date, end_date, sufijo):
     df_final = pd.concat(dfs)
     return df_final
 
-
+# Imoprt extract data
 def extract_api_re(endpoint, start_date, end_date, sufijo):
     '''
     Esta función calcula el número de veces que hay que llamar a la función interación, en función de los meses

@@ -1,11 +1,7 @@
 # imports
-import requests
-from bs4 import BeautifulSoup
 import pandas as pd
-import json
 import numpy as np
-import datetime
-import time
+import requests
 
 
 def web_scraping_iberdrola(user,passwd, fecha_inicio, fecha_fin):
@@ -100,4 +96,3 @@ def web_scraping_iberdrola(user,passwd, fecha_inicio, fecha_fin):
             time.sleep(3) # Llamo cada 3 segundos acordado con Iberdrola tras la revocación
         start_date += delta # Sumo un día
     return df_consumo
-
